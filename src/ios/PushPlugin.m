@@ -119,7 +119,10 @@
             [pubSub unsubscribeFromTopic:topic];
         }
     } else {
+        FIRInstanceIDDeleteHandler deleteHandler = ^void(NSError *error){ };
+        FIRInstanceID * iid = [FIRInstanceID instanceID];
         [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+        [iid deleteIDWithHandler:deleteHandler];
         [self successWithMessage:command.callbackId withMsg:@"unregistered"];
     }
 }
